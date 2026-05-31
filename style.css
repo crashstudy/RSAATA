@@ -1,0 +1,1138 @@
+
+/* --- TABLE OF CONTENTS ---
+1.  Global Styles & Variables
+2.  Utility Classes
+3.  Loading Screen
+4.  Announcement Bar
+5.  Header & Navigation
+6.  Mobile Drawer Menu
+7.  Hero Section
+8.  About Section
+9.  Products Section
+10. Why Choose Us Section
+11. Customer Reviews Section
+12. Order & Contact Section
+13. Footer
+14. Sticky CTA & Scroll to Top
+15. Animations & Effects
+16. Media Queries (Tablet & Desktop)
+--------------------------- */
+
+
+/* 1. Global Styles & Variables
+------------------------------------ */
+:root {
+    --primary-green: #1F5E2F;
+    --dark-green: #134121;
+    --gold-accent: #D4A548;
+    --cream-background: #FAF6EE;
+    --white: #FFFFFF;
+    --text-color: #222222;
+    --light-gray: #f0f0f0;
+    --border-color: #e0e0e0;
+    
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Poppins', sans-serif;
+    
+    --header-height: 70px;
+    --transition-speed: 0.3s ease;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-color);
+    background-color: var(--cream-background);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    color: var(--dark-green);
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.1rem; }
+
+section {
+    padding: 3rem 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+a {
+    color: var(--primary-green);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+a:hover {
+    color: var(--dark-green);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 2. Utility Classes
+------------------------------------ */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    border: 2px solid transparent;
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background-color: var(--primary-green);
+    color: var(--white);
+    border-color: var(--primary-green);
+}
+
+.btn-primary:hover {
+    background-color: var(--dark-green);
+    border-color: var(--dark-green);
+    color: var(--white);
+}
+
+.btn-secondary {
+    background-color: var(--white);
+    color: var(--primary-green);
+    border-color: var(--primary-green);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-green);
+    color: var(--white);
+}
+
+.btn-disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    border-color: #ccc;
+}
+
+.btn-full {
+    width: 100%;
+    padding: 1rem;
+}
+
+.btn-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+    width: 24px;
+    height: 24px;
+}
+
+/* 3. Loading Screen
+------------------------------------ */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--cream-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+#loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border-left-color: var(--primary-green);
+    animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 4. Announcement Bar
+------------------------------------ */
+/* Announcement Bar ke liye naya style */
+.announcement-bar {
+  display: flex;
+  justify-content: center; /* Content ko horizontal center mein rakhega */
+  align-items: center;     /* Content ko vertical center mein rakhega */
+  background-color: var(--dark-green);
+    color: var(--white);
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Icon ke liye style */
+.announcement-icon {
+  height: 1.5em;      /* Isse icon ka size text ke hisaab se set hoga */
+  margin-right: 10px; /* Icon aur text ke beech thodi jagah dega */
+}
+
+
+/* 5. Header & Navigation
+------------------------------------ */
+#header {
+    background-color: var(--cream-background);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    height: var(--header-height);
+    transition: all var(--transition-speed);
+}
+
+#header.scrolled {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: rgba(250, 246, 238, 0.95);
+    backdrop-filter: blur(5px);
+}
+
+#header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--dark-green);
+}
+
+#navbar { display: none; } /* Hidden on mobile */
+.header-call-btn { display: none; } /* Hidden on mobile */
+
+#menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1002;
+}
+
+.hamburger-bar {
+    width: 30px;
+    height: 3px;
+    background-color: var(--dark-green);
+    border-radius: 5px;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
+}
+
+#menu-toggle.open .hamburger-bar:nth-child(1) {
+    transform: rotate(45deg);
+}
+#menu-toggle.open .hamburger-bar:nth-child(2) {
+    opacity: 0;
+    transform: translateX(20px);
+}
+#menu-toggle.open .hamburger-bar:nth-child(3) {
+    transform: rotate(-45deg);
+}
+
+/* Add this inside the "Header & Navigation" section */
+
+.logo img {
+    height: 50px; /* Adjust this value as needed */
+    width: auto;
+}
+/* 6. Mobile Drawer Menu
+------------------------------------ */
+#mobile-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%;
+    max-width: 300px;
+    height: 100%;
+    background-color: var(--cream-background);
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    transform: translateX(-100%);
+    transition: transform var(--transition-speed);
+    z-index: 1001;
+    padding-top: calc(var(--header-height) + 2rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#mobile-drawer.open {
+    transform: translateX(0);
+}
+
+#mobile-drawer nav ul {
+    display: flex;
+    flex-direction: column;
+}
+
+#mobile-drawer nav a {
+    display: block;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    color: var(--dark-green);
+    font-weight: 500;
+}
+
+#mobile-drawer nav a:hover {
+    background-color: var(--light-gray);
+}
+
+.drawer-contact {
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+}
+.drawer-contact .btn {
+    flex: 1;
+}
+
+/* 7. Hero Section
+------------------------------------ */
+/* 7. Hero Section
+------------------------------------ */
+.hero-section {
+    position: relative; /* Needed for the overlay */
+    padding: 5rem 0;   /* Increased padding for better look */
+    background-image: url('poster.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    color: var(--white); /* Sets default text color to white */
+}
+/* --- Hero Section Text & Element Adjustments for Background --- */
+
+/* Ensure content is above the dark overlay */
+.hero-container {
+    position: relative;
+    z-index: 2;
+}
+
+/* 1. Change main heading and paragraph to white */
+.hero-content h1,
+.hero-content p {
+    color: var(--white);
+    /* Optional: Adds a subtle shadow to make text pop */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* 2. Make the feature icon text white and clear */
+.feature-item span {
+    color: var(--white);
+    font-weight: 500; /* Makes the text slightly bolder */
+}
+
+/* IMPORTANT: Your placeholder icons are likely dark.
+   The filter below inverts their color to white.
+   When you replace them with real icons, make sure they are white or light-colored. */
+.feature-item img {
+    filter: brightness(0) invert(1);
+}
+
+
+/* 3. Adjust button styles for better contrast on the dark background */
+
+/* Make the "Order Now" button more prominent */
+.hero-buttons .btn-primary {
+    background-color: var(--gold-accent); /* Using the gold accent color */
+    border-color: var(--gold-accent);
+    color: var(--dark-green); /* Dark text on gold looks premium */
+    font-weight: 600;
+}
+
+.hero-buttons .btn-primary:hover {
+    background-color: #EAC169; /* A slightly lighter gold for hover */
+    border-color: #EAC169;
+}
+
+/* Change the "WhatsApp Order" button to a "ghost button" style */
+.hero-buttons .btn-secondary {
+    background-color: transparent;
+    color: var(--white);
+    border-color: var(--white); /* White border */
+}
+
+.hero-buttons .btn-secondary:hover {
+    background-color: var(--white);
+    color: var(--primary-green); /* Text turns green on hover */
+}
+
+/* Make sure the WhatsApp icon in the button is also white */
+.hero-buttons .btn-secondary .btn-icon {
+    filter: brightness(0) invert(1);
+}
+
+/* On hover, the icon color will revert as the button background becomes white */
+.hero-buttons .btn-secondary:hover .btn-icon {
+    filter: none;
+}
+/* This adds a dark overlay so text is readable */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity (0.5) as needed */
+    z-index: 1;
+}
+
+/* This ensures your content is on top of the overlay */
+.hero-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+}
+
+/* Change heading and paragraph color to white */
+.hero-content h1,
+.hero-content p {
+    color: var(--white);
+}
+
+/* Make feature icon text white */
+.feature-item span {
+    color: var(--white);
+    font-weight: 500;
+}
+
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+}
+
+.hero-content h1 {
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.feature-icons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 80px;
+}
+
+.feature-item img {
+    width: 40px;
+    height: 40px;
+}
+
+.feature-item span {
+    font-size: 0.8rem;
+    line-height: 1.2;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.hero-buttons .btn {
+    width: 80%;
+    max-width: 300px;
+}
+
+.hero-image img {
+    border-radius: 10px;
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+/* 8. About Section
+------------------------------------ */
+.about-section {
+    background: var(--white);
+}
+.about-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.about-image img {
+    border-radius: 10px;
+}
+
+.about-content h2 {
+    font-size: 1.2rem;
+    color: var(--gold-accent);
+    margin-bottom: 0.5rem;
+}
+
+.about-content h3 {
+    margin-bottom: 1rem;
+}
+
+.about-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.about-feature-item {
+    text-align: center;
+}
+
+.about-feature-item img {
+    margin: 0 auto 0.5rem;
+}
+
+.read-more {
+    font-weight: 600;
+}
+
+/* 9. Products Section
+------------------------------------ */
+.products-section {
+    background: var(--cream-background);
+}
+.product-slider-wrapper {
+    position: relative;
+}
+
+.product-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    scrollbar-width: none; /* Firefox */
+}
+.product-slider::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.product-card {
+    flex: 0 0 70%;
+    max-width: 280px;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+    padding: 1.5rem;
+    scroll-snap-align: center;
+    position: relative;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.product-image {
+    margin-bottom: 1rem;
+}
+.product-image img {
+    border-radius: 5px;
+}
+.product-card h3 {
+    font-size: 1.25rem;
+}
+.product-card p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+.product-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: var(--gold-accent);
+    color: var(--white);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    border-radius: 3px;
+    font-weight: 500;
+}
+.slider-btn {
+    display: none; /* Hidden on mobile */
+}
+
+/* 10. Why Choose Us Section
+------------------------------------ */
+.why-us-section {
+    background: var(--white);
+}
+.why-us-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+}
+.why-us-item img {
+    margin: 0 auto 1rem;
+}
+.why-us-item h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+}
+.why-us-item p {
+    color: #555;
+}
+
+/* 11. Customer Reviews Section
+------------------------------------ */
+.review-carousel-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+.review-carousel-wrapper::before,
+.review-carousel-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    z-index: 2;
+}
+.review-carousel-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, var(--cream-background), transparent);
+}
+.review-carousel-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, var(--cream-background), transparent);
+}
+
+.review-carousel {
+    display: flex;
+    width: fit-content;
+    animation: scroll 40s linear infinite;
+}
+.review-card {
+    flex-shrink: 0;
+    width: 300px;
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.review-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.review-author img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.stars {
+    color: var(--gold-accent);
+}
+.review-card p {
+    color: #555;
+    font-style: italic;
+}
+
+/* 12. Order & Contact Section
+------------------------------------ */
+.order-section {
+    background: var(--white);
+}
+.order-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+.contact-info-block h3,
+.order-form-block h3 {
+    margin-bottom: 1.5rem;
+}
+.contact-info-block ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.contact-info-block li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.map-placeholder {
+    margin-top: 1.5rem;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#orderForm .form-group {
+    margin-bottom: 1.25rem;
+}
+#orderForm label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+#orderForm input,
+#orderForm textarea,
+#orderForm select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+}
+#orderForm input:focus,
+#orderForm textarea:focus,
+#orderForm select:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 2px rgba(31, 94, 47, 0.2);
+}
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+/* 13. Footer
+------------------------------------ */
+.footer {
+    background-color: var(--dark-green);
+    color: var(--white);
+    padding-top: 3rem;
+}
+.footer a {
+    color: var(--light-gray);
+}
+.footer a:hover {
+    color: var(--gold-accent);
+}
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.footer-col h4 {
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+.footer-col p, .footer-col li {
+    margin-bottom: 0.5rem;
+}
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-links img {
+  width: 40px;  /* आप अपनी पसंद के अनुसार आकार बदल सकते हैं */
+  height: auto; /* यह छवि के अनुपात को बनाए रखेगा */
+  margin: 0 10px; /* यह आइकॉन के बीच में थोड़ी जगह देगा */
+}
+.footer-bottom {
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-size: 0.9rem;
+}
+
+/* /* 14. Sticky CTA & Scroll to Top
+------------------------------------ */
+.mobile-sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    z-index: 999;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
+
+.mobile-sticky-cta a {
+    flex: 1;
+    padding: 0.75rem 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    
+    /* These flex properties are key for alignment */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Adds space between the icon and text */
+}
+
+/* THIS IS THE CRITICAL FIX FOR THE HUGE ICONS */
+.mobile-sticky-cta a img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain; /* Prevents the icon from stretching */
+}
+
+.call-now-btn {
+    background: var(--dark-green);
+    color: var(--white);
+}
+
+.whatsapp-now-btn {
+    background: var(--primary-green);
+    color: var(--white);
+}
+
+#scrollToTopBtn {
+    position: fixed;
+    /* Increased bottom to give space above the new CTA bar */
+    bottom: 85px; 
+    right: 20px;
+    background-color: var(--primary-green);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    transform: translateY(20px);
+}
+
+#scrollToTopBtn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* 15. Animations & Effects
+------------------------------------ */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.ripple-effect {
+    position: relative;
+    overflow: hidden;
+}
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* 16. Media Queries (Tablet & Desktop)
+------------------------------------ */
+
+/* Tablet */
+@media (min-width: 768px) {
+    h1 { font-size: 3rem; }
+    h2 { font-size: 2.25rem; }
+    section { padding: 4rem 0; }
+
+    .hero-container {
+        text-align: left;
+    }
+    .hero-buttons {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+    .hero-buttons .btn {
+        width: auto;
+        max-width: none;
+    }
+    .feature-icons {
+        justify-content: flex-start;
+    }
+    .about-container {
+        flex-direction: row;
+        align-items: center;
+        gap: 3rem;
+    }
+    .about-image, .about-content {
+        flex: 1;
+    }
+    .product-card {
+        flex: 0 0 40%;
+    }
+    .why-us-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .order-container {
+        flex-direction: row;
+        gap: 3rem;
+    }
+    .contact-info-block, .order-form-block {
+        flex: 1;
+    }
+    .footer-container {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 3rem;
+    }
+    .footer-col {
+        flex: 1;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    h1 { font-size: 3.5rem; }
+    section { padding: 5rem 0; }
+
+    .mobile-sticky-cta { display: none; }
+    #scrollToTopBtn { bottom: 20px; }
+    #menu-toggle { display: none; }
+
+    #navbar {
+        display: block;
+    }
+    #navbar ul {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    #navbar .nav-link {
+        font-weight: 500;
+        position: relative;
+        padding: 5px 0;
+    }
+    #navbar .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--primary-green);
+        transition: width var(--transition-speed);
+    }
+    #navbar .nav-link:hover::after,
+    #navbar .nav-link.active::after {
+        width: 100%;
+    }
+
+    .header-call-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background-color: var(--primary-green);
+        color: var(--white);
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        transition: background-color var(--transition-speed);
+    }
+    .header-call-btn:hover {
+        background-color: var(--dark-green);
+        color: var(--white);
+    }
+
+    .hero-container {
+        flex-direction: row;
+        align-items: center;
+        gap: 4rem;
+    }
+    .hero-content, .hero-image {
+        flex: 1;
+    }
+    
+    .product-slider {
+        overflow: hidden;
+    }
+    .slider-btn {
+        display: block;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.8);
+        border: 1px solid var(--border-color);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        z-index: 10;
+        font-size: 1.5rem;
+        color: var(--dark-green);
+    }
+    .slider-btn:hover {
+        background-color: var(--primary-green);
+        color: var(--white);
+    }
+    .prev-btn { left: -20px; }
+    .next-btn { right: -20px; }
+    
+    .why-us-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+/* --- Final Icon Sizing Corrections --- */
+
+/* 1. "Why Choose Us" Section Icons */
+/* This targets the icons for Hygienic Process, Affordable Price, etc. */
+#why-us .why-us-item img {
+    width: 80px;         /* Sets a larger, more appropriate width */
+    height: 80px;        /* Sets a matching height */
+    object-fit: contain; /* Ensures the icon scales correctly without stretching */
+    margin: 0 auto 1rem; /* Re-centers the icon above its text */
+}
+
+/* 2. "Contact Us" & Order Section Icons */
+/* This rule styles the large phone icon to look like the screenshot */
+#order .contact-info-block ul li:first-child {
+    display: flex;       /* Uses flexbox for better alignment */
+    align-items: center; /* Vertically centers the icon with the text */
+    gap: 1.5rem;         /* Adds more space between the icon and the number */
+    margin-bottom: 1.5rem; /* Adds some space below the phone number entry */
+}
+
+#order .contact-info-block ul li:first-child img {
+    width: 60px;         /* Controls the size of the large phone icon */
+    height: 60px;
+    object-fit: contain;
+}
+
+/* This rule makes sure all OTHER icons in that list (WhatsApp, Email, Location) are smaller and uniform. */
+#order .contact-info-block ul li:not(:first-child) img {
+    width: 26px;         /* Sets a smaller, consistent size */
+    height: 26px;
+    object-fit: contain;
+}
+
+/* --- Image Container & Layout Fixes --- */
+
+/* 1. Hero Section Image Fix */
+/* This rule ensures the image container behaves correctly. */
+.hero-image {
+    max-width: 500px; /* Limits the maximum width */
+    margin: 0 auto;   /* Centers the container on desktop */
+    height: auto;
+    overflow: hidden; /* Hides any part of the image that spills out */
+}
+
+/* This rule styles the actual image inside the container. */
+.hero-image img {
+    width: 100%;      /* Makes the image fill the container's width */
+    height: 100%;     /* Makes the image fill the container's height */
+    object-fit: cover; /* Crucially, this scales the image to fill the space without distortion */
+    border-radius: 10px;
+}
+
+
+/* 2. About Section Image Fix */
+/* This rule styles the image container in the About section. */
+.about-image {
+    max-height: 450px; /* Prevents the image from being excessively tall */
+    overflow: hidden;  /* Hides any overflow */
+}
+
+/* This styles the actual image inside. */
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Fills the container without stretching */
+    border-radius: 10px;
+}
+
+/* 3. "Scroll to Top" Button Overlap Fix */
+/* This ensures the section content stays on top of the floating button. */
+#about .about-content {
+    position: relative;
+    z-index: 5;
+}
